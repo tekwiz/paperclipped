@@ -26,6 +26,11 @@ class PaperclippedExtension < Radiant::Extension
     end
   end
   
+  extension_config do |config|
+    config.gem 'paperclip-cloudfiles', :lib => 'paperclip', :version => '~> 2.3.1.1.0'
+    config.gem 'imagesize', :lib => 'image_size', :version => '~> 0.1.0'
+  end
+  
   def activate
     
     Radiant::AdminUI.send :include, AssetsAdminUI unless defined? admin.asset # UI is a singleton and already loaded
