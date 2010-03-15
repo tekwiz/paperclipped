@@ -244,6 +244,7 @@ module AssetTags
           <!--[if !IE]>-->
           <object type="application/x-shockwave-flash" data="#{url}" #{dimensions}>
           <!--<![endif]-->
+          <param name="wmode" value="transparent" />
           #{tag.expand}
           <!--[if !IE]>-->
           </object>
