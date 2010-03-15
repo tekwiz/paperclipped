@@ -1,6 +1,4 @@
 # require_dependency 'application_controller'
-require File.dirname(__FILE__) + '/lib/url_additions'
-include UrlAdditions
 
 class PaperclippedExtension < Radiant::Extension
   version "0.8.0"
@@ -28,7 +26,15 @@ class PaperclippedExtension < Radiant::Extension
   
   extension_config do |config|
     config.gem 'paperclip-cloudfiles', :lib => 'paperclip', :version => '~> 2.3.1.1.0'
+    require 'paperclip'
     config.gem 'imagesize', :lib => 'image_size', :version => '~> 0.1.0'
+    require 'image_size'
+
+    Paperclip::Attachment.interpolations[:no_original_style] = lambda do |attachment, style|
+      style ||= :original
+      style == attachment.default_style ? nil : "_#{style}"
+    end
+
   end
   
   def activate
